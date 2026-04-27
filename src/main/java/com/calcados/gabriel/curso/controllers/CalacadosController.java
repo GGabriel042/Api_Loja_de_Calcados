@@ -1,5 +1,7 @@
 package com.calcados.gabriel.curso.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.calcados.gabriel.curso.calcados.CalcadoRepository;
 import com.calcados.gabriel.curso.calcados.Calcados;
 import com.calcados.gabriel.curso.calcados.DadosCadastroCalcado;
+import com.calcados.gabriel.curso.calcados.DadosListagemCalcado;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("/calcados")
@@ -20,8 +26,15 @@ public class CalacadosController {
     private CalcadoRepository repository;
     
     @PostMapping
+    @Transactional
     public void cadastrar(@RequestBody @Valid DadosCadastroCalcado dados) {
         
         repository.save(new Calcados(dados));
     }
+
+    @GetMapping()
+    public List<DadosListagemCalcado> listar() {
+        return repository.findAll().stream().map(DadosListagemCalcado::new).toList();
+    }
+    
 }
