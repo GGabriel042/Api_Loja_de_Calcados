@@ -24,6 +24,23 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 public class Calcados {
 
+
+    public Calcados(DadosCadastroCalcado dados) {
+        this.sku =          dados.sku();
+        this.nome =         dados.nome();
+        this.marca =        dados.marca();
+        this.descricao =    dados.descricao();
+        this.material =     dados.material();
+        this.tamanho =      dados.tamanho();
+        this.genero =       dados.genero();
+        this.categoria =    dados.categoria();
+        this.cor =          dados.cor();
+        this.peso_medio =   dados.peso_medio();
+        this.preco =        dados.preco();
+        this.estoque =      dados.estoque();
+    }
+
+
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
