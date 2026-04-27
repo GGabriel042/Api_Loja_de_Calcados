@@ -38,6 +38,7 @@ public class Calcados {
         this.peso_medio =   dados.peso_medio();
         this.preco =        dados.preco();
         this.estoque =      dados.estoque();
+        this.ativo =        true;
     }
 
 
@@ -59,6 +60,7 @@ public class Calcados {
     private BigDecimal peso_medio; 
     private BigDecimal preco;
     private int estoque;
+    private boolean ativo;
 
 
 
@@ -73,6 +75,12 @@ public class Calcados {
         this.categoria = dados.categoria() != null ? dados.categoria() : this.categoria;
         this.cor = dados.cor() != null ? dados.cor() : this.cor;
         this.preco = dados.preco() != null ? BigDecimal.valueOf(dados.preco()) : this.preco;
+    }
+
+
+
+    public void inativar() {
+        this.ativo = false;
     }
     
 }

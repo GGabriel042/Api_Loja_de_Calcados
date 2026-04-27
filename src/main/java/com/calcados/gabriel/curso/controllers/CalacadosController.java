@@ -42,7 +42,7 @@ public class CalacadosController {
 
     @GetMapping()
     public List<DadosListagemCalcado> listar() {
-        return repository.findAll().stream().map(DadosListagemCalcado::new).toList();
+        return repository.findAllByAtivoTrue().stream().map(DadosListagemCalcado::new).toList();
     }
     
     @PutMapping
@@ -56,5 +56,12 @@ public class CalacadosController {
     @Transactional
     public void excluir(@PathVariable Long id) {
         repository.deleteById(id);
+    }
+
+    @DeleteMapping("inativar/{id}")
+    @Transactional
+    public void inativar(@PathVariable Long id) {
+        var calcado = repository.getReferenceById(id);
+        calcado.inativar();
     }
 }
