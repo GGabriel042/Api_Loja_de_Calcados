@@ -8,5 +8,6 @@ public enum Material {
     MESH,
     VERNIZ,
     BORRACHA,
-    PLASTICO
+    PLASTICO,
+    TECIDO
 }

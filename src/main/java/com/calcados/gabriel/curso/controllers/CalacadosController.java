@@ -10,6 +10,8 @@ import com.calcados.gabriel.curso.calcados.CalcadoRepository;
 import com.calcados.gabriel.curso.calcados.Calcados;
 import com.calcados.gabriel.curso.calcados.DadosCadastroCalcado;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/calcados")
 public class CalacadosController {
@@ -18,7 +20,7 @@ public class CalacadosController {
     private CalcadoRepository repository;
     
     @PostMapping
-    public void cadastrar(@RequestBody DadosCadastroCalcado dados) {
+    public void cadastrar(@RequestBody @Valid DadosCadastroCalcado dados) {
         
         repository.save(new Calcados(dados));
     }
