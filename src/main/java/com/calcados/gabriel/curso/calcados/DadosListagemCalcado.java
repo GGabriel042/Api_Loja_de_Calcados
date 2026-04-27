@@ -1,6 +1,7 @@
 package com.calcados.gabriel.curso.calcados;
 
 public record DadosListagemCalcado(
+    Long id,
     String nome, 
     String marca, 
     String descricao, 
@@ -12,7 +13,8 @@ public record DadosListagemCalcado(
     Double preco) {
 
     public DadosListagemCalcado(Calcados calcados) {
-        this(calcados.getNome(), 
+        this(calcados.getId(),
+            calcados.getNome(), 
             calcados.getMarca(), 
             calcados.getDescricao(), 
             calcados.getMaterial(), 

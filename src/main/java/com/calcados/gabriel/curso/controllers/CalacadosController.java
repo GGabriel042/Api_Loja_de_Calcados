@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.calcados.gabriel.curso.calcados.CalcadoRepository;
 import com.calcados.gabriel.curso.calcados.Calcados;
+import com.calcados.gabriel.curso.calcados.DadosAtualizarCalcado;
 import com.calcados.gabriel.curso.calcados.DadosCadastroCalcado;
 import com.calcados.gabriel.curso.calcados.DadosListagemCalcado;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import lombok.experimental.var;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
 
 
 @RestController
@@ -37,4 +43,10 @@ public class CalacadosController {
         return repository.findAll().stream().map(DadosListagemCalcado::new).toList();
     }
     
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizarCalcado dados) {
+        var calcado = repository.getReferenceById(dados.id());
+        calcado.atualizarInformacoes(dados);
+    }
 }

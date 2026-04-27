@@ -59,5 +59,20 @@ public class Calcados {
     private BigDecimal peso_medio; 
     private BigDecimal preco;
     private int estoque;
+
+
+
+    public void atualizarInformacoes(DadosAtualizarCalcado dados) {
+        
+        this.nome = dados.nome() != null ? dados.nome() : this.nome;
+        this.marca = dados.marca() != null ? dados.marca() : this.marca;
+        this.descricao = dados.descricao() != null ? dados.descricao() : this.descricao;
+        this.material = dados.material() != null ? dados.material() : this.material;
+        this.tamanho = dados.tamanho() != null ? dados.tamanho() : this.tamanho;
+        this.genero = dados.genero() != null ? dados.genero() : this.genero;
+        this.categoria = dados.categoria() != null ? dados.categoria() : this.categoria;
+        this.cor = dados.cor() != null ? dados.cor() : this.cor;
+        this.preco = dados.preco() != null ? BigDecimal.valueOf(dados.preco()) : this.preco;
+    }
     
 }
