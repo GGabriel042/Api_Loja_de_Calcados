@@ -82,5 +82,11 @@ public class Calcados {
     public void inativar() {
         this.ativo = false;
     }
+
+
+
+    public void ativar() {
+        this.ativo = true;
+    }
     
 }

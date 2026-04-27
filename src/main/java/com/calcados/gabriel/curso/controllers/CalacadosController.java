@@ -64,4 +64,11 @@ public class CalacadosController {
         var calcado = repository.getReferenceById(id);
         calcado.inativar();
     }
+
+    @PutMapping("ativar/{id}")
+    @Transactional
+    public void ativar(@PathVariable Long id) {
+        var calcado = repository.getReferenceById(id);
+        calcado.ativar();
+    }
 }
