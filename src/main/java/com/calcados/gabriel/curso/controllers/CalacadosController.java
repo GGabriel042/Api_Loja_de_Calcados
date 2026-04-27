@@ -18,7 +18,9 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.experimental.var;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
@@ -48,5 +50,11 @@ public class CalacadosController {
     public void atualizar(@RequestBody @Valid DadosAtualizarCalcado dados) {
         var calcado = repository.getReferenceById(dados.id());
         calcado.atualizarInformacoes(dados);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id) {
+        repository.deleteById(id);
     }
 }
