@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.calcados.gabriel.curso.calcados.CalcadoRepository;
 import com.calcados.gabriel.curso.calcados.Calcados;
@@ -37,10 +38,13 @@ public class CalacadosController {
     
     @PostMapping
     @Transactional
-    public ResponseEntity<Void> cadastrar(@RequestBody @Valid DadosCadastroCalcado dados) {
-        
-        repository.save(new Calcados(dados));
-        return ResponseEntity.created(null).build();
+    public ResponseEntity<DadosDetalhamentoCalcado> cadastrar(@RequestBody @Valid DadosCadastroCalcado dados, UriComponentsBuilder uriBuilder) {
+        var calcado = new Calcados(dados);
+        repository.save(calcado);
+
+        var uri = uriBuilder.path("/calcados/{id}").buildAndExpand(calcado.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoCalcado(calcado));
     }
 
 
