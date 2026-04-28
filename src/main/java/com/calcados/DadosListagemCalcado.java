@@ -1,4 +1,4 @@
-package com.calcados.gabriel.curso.calcados;
+package com.calcados;
 
 public record DadosListagemCalcado(
     Long id,

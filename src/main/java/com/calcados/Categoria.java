@@ -1,4 +1,4 @@
-package com.calcados.gabriel.curso.calcados;
+package com.calcados;
 
 public enum Categoria {
     ADULTO, 

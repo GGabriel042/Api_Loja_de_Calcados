@@ -1,4 +1,4 @@
-package com.calcados.gabriel.curso.controllers;
+package com.controllers;
 
 import java.util.List;
 
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.calcados.gabriel.curso.calcados.CalcadoRepository;
-import com.calcados.gabriel.curso.calcados.Calcados;
-import com.calcados.gabriel.curso.calcados.DadosAtualizarCalcado;
-import com.calcados.gabriel.curso.calcados.DadosCadastroCalcado;
-import com.calcados.gabriel.curso.calcados.DadosDetalhamentoCalcado;
-import com.calcados.gabriel.curso.calcados.DadosListagemCalcado;
+import com.calcados.CalcadoRepository;
+import com.calcados.Calcados;
+import com.calcados.DadosAtualizarCalcado;
+import com.calcados.DadosCadastroCalcado;
+import com.calcados.DadosDetalhamentoCalcado;
+import com.calcados.DadosListagemCalcado;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -25,9 +25,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 
 
