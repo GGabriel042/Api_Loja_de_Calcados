@@ -3,6 +3,7 @@ package com.calcados.gabriel.curso.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import com.calcados.gabriel.curso.calcados.CalcadoRepository;
 import com.calcados.gabriel.curso.calcados.Calcados;
 import com.calcados.gabriel.curso.calcados.DadosAtualizarCalcado;
 import com.calcados.gabriel.curso.calcados.DadosCadastroCalcado;
+import com.calcados.gabriel.curso.calcados.DadosDetalhamentoCalcado;
 import com.calcados.gabriel.curso.calcados.DadosListagemCalcado;
 
 import jakarta.transaction.Transactional;
@@ -35,40 +37,52 @@ public class CalacadosController {
     
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosCadastroCalcado dados) {
+    public ResponseEntity<Void> cadastrar(@RequestBody @Valid DadosCadastroCalcado dados) {
         
         repository.save(new Calcados(dados));
+        return ResponseEntity.created(null).build();
     }
 
+
     @GetMapping()
-    public List<DadosListagemCalcado> listar() {
-        return repository.findAllByAtivoTrue().stream().map(DadosListagemCalcado::new).toList();
+    public ResponseEntity<List<DadosListagemCalcado>> listar() {
+        var lista = repository.findAllByAtivoTrue().stream().map(DadosListagemCalcado::new).toList();
+        return ResponseEntity.ok(lista);
     }
+
     
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizarCalcado dados) {
+    public ResponseEntity<DadosDetalhamentoCalcado> atualizar(@RequestBody @Valid DadosAtualizarCalcado dados) {
         var calcado = repository.getReferenceById(dados.id());
         calcado.atualizarInformacoes(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoCalcado(calcado));
     }
+
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void excluir(@PathVariable Long id) {
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
         repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
+
 
     @DeleteMapping("inativar/{id}")
     @Transactional
-    public void inativar(@PathVariable Long id) {
+    public ResponseEntity<Void> inativar(@PathVariable Long id) {
         var calcado = repository.getReferenceById(id);
         calcado.inativar();
+
+        return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("ativar/{id}")
+
+    @PutMapping("reativar/{id}")
     @Transactional
-    public void ativar(@PathVariable Long id) {
+    public ResponseEntity<Void> reativar(@PathVariable Long id) {
         var calcado = repository.getReferenceById(id);
-        calcado.ativar();
+        calcado.reativar();
+        return ResponseEntity.noContent().build();
     }
 }

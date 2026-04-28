@@ -74,7 +74,9 @@ public class Calcados {
         this.genero = dados.genero() != null ? dados.genero() : this.genero;
         this.categoria = dados.categoria() != null ? dados.categoria() : this.categoria;
         this.cor = dados.cor() != null ? dados.cor() : this.cor;
+        this.peso_medio = dados.peso_medio() != null ? BigDecimal.valueOf(dados.peso_medio()) : this.peso_medio;
         this.preco = dados.preco() != null ? BigDecimal.valueOf(dados.preco()) : this.preco;
+        this.estoque = dados.estoque() != null ? dados.estoque() : this.estoque;
     }
 
 
@@ -83,10 +85,14 @@ public class Calcados {
         this.ativo = false;
     }
 
-
-
-    public void ativar() {
+    public void reativar() {
         this.ativo = true;
+    }
+
+
+
+    public Boolean getAtivo() {
+        return this.ativo;
     }
     
 }

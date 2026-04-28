@@ -14,7 +14,9 @@ public record DadosAtualizarCalcado(
     Genero genero, 
     Categoria categoria, 
     String cor, 
-    Double preco) {
+    Double preco,
+    Double peso_medio,
+    Integer estoque) {
 
 
 } 
