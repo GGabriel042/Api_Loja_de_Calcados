@@ -32,6 +32,21 @@ public class TokenService {
         }
     }
 
+    public String getSubject(String tokenJWT) {
+        try {
+            var algorithm = Algorithm.HMAC256(secret);
+            return JWT.require(algorithm)
+                .withIssuer("Calcados_api")
+                .build()
+                .verify(tokenJWT)
+                .getSubject();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Token inválido ou expirado");
+        }
+    }
+
+
     private Instant dataExpiração() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
