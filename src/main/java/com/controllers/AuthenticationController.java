@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.infra.TokenService;
 import com.usuarios.DadosAuthentication;
+import com.usuarios.Usuario;
 
 import jakarta.validation.Valid;
 
@@ -19,14 +21,17 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager manager;
+
+    @Autowired
+    private TokenService tokenService;
     
     @PostMapping
     public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAuthentication dados) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(dados.username(), dados.password());
         var authentication = manager.authenticate(authenticationToken);
 
-        
-        return ResponseEntity.ok("senha123");
+
+        return ResponseEntity.ok(tokenService.gerarToken((Usuario) authentication.getPrincipal()));
     }
 
 }
