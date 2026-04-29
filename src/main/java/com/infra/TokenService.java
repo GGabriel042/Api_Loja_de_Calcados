@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
@@ -14,9 +15,12 @@ import com.usuarios.Usuario;
 @Service
 public class TokenService {
     
+    @Value("${api.security.token.secret}")
+    private String secret;
+
     public String gerarToken(Usuario usuario) {
         try { 
-            var algorithm = Algorithm.HMAC256("senha123");
+            var algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                 .withIssuer("Calcados_api")
                 .withSubject(usuario.getUsername())
